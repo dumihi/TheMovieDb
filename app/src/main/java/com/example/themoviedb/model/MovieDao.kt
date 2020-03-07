@@ -5,10 +5,10 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface PostDao {
-    @get:Query("SELECT * FROM post")
-    val all: List<Post>
+interface MovieDao {
+    @get:Query("SELECT * FROM movie")
+    val all: List<Movie>
 
     @Insert
-    fun insertAll(vararg users: Post)
+    fun insertAll(vararg users: Movie)
 }

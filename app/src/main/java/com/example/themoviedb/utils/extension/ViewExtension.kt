@@ -2,7 +2,11 @@ package com.example.themoviedb.utils.extension
 
 import android.content.ContextWrapper
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 fun View.getParentActivity(): AppCompatActivity?{
     var context = this.context
@@ -14,3 +18,23 @@ fun View.getParentActivity(): AppCompatActivity?{
     }
     return null
 }
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+@BindingAdapter("loadImageURL")
+fun loadImageURL(view: ImageView, imageUrl: String) {
+    Glide.with(view.getContext())
+        .load(imageUrl).apply(RequestOptions().circleCrop())
+        .into(view)
+}
+

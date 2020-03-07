@@ -1,4 +1,4 @@
-package com.example.themoviedb.ui.post
+package com.example.themoviedb.ui.movie
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -7,22 +7,22 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
-import com.example.themoviedb.databinding.ActivityPostListBinding
+import com.example.themoviedb.databinding.ActivityMovieListBinding
 import com.google.android.material.snackbar.Snackbar
 import com.example.themoviedb.injection.ViewModelFactory
 
-class PostListActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityPostListBinding
-    private lateinit var viewModel: PostListViewModel
+class MovieListActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityMovieListBinding
+    private lateinit var viewModel: MovieListViewModel
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_post_list)
-        binding.postList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_list)
+        binding.movieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(PostListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(MovieListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer {
             errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
         })

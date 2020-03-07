@@ -2,8 +2,8 @@ package com.example.themoviedb.injection.component
 
 import dagger.Component
 import com.example.themoviedb.injection.module.NetworkModule
-import com.example.themoviedb.ui.post.PostListViewModel
-import com.example.themoviedb.ui.post.PostViewModel
+import com.example.themoviedb.ui.movie.MovieListViewModel
+import com.example.themoviedb.ui.movie.MovieViewModel
 import javax.inject.Singleton
 
 /**
@@ -16,12 +16,12 @@ interface ViewModelInjector {
      * Injects required dependencies into the specified PostListViewModel.
      * @param postListViewModel PostListViewModel in which to inject the dependencies
      */
-    fun inject(postListViewModel: PostListViewModel)
+    fun inject(movieListViewModel: MovieListViewModel)
     /**
      * Injects required dependencies into the specified PostViewModel.
      * @param postViewModel PostViewModel in which to inject the dependencies
      */
-    fun inject(postViewModel: PostViewModel)
+    fun inject(movieViewModel: MovieViewModel)
 
     @Component.Builder
     interface Builder {

@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
-import com.example.themoviedb.BuildConfig
-import com.example.themoviedb.network.PostApi
+import com.example.themoviedb.network.MovieApi
+import com.example.themoviedb.utils.API_KEY
 import com.example.themoviedb.utils.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,8 +28,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun providePostApi(retrofit: Retrofit): PostApi {
-        return retrofit.create(PostApi::class.java)
+    internal fun providePostApi(retrofit: Retrofit): MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
 
     /**
@@ -47,12 +47,12 @@ object NetworkModule {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpBuilder.addInterceptor(httpLoggingInterceptor)
 
-        okHttpBuilder.addInterceptor({
+        okHttpBuilder.addInterceptor {
             val request = it.request()
-            val url = request.url().newBuilder()
-                    .build()
+            val url = request.url().newBuilder().addQueryParameter("api_key", API_KEY)
+                .build()
             it.proceed(request.newBuilder().url(url).build())
-        })
+        }
 
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)

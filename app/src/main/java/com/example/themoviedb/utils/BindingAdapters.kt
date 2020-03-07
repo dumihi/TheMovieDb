@@ -1,4 +1,4 @@
-package net.gahfy.mvvmposts.utils
+package com.example.themoviedb.utils
 
 import android.view.View
 import android.widget.TextView

@@ -3,4 +3,5 @@
 
     <string name="retry">Retry</string>
     <string name="post_error">An error occurred while loading the posts</string>
+    <string name="_double">%1$.1f</string>
 </resources>
