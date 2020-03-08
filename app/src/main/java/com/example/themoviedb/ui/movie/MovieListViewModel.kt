@@ -37,12 +37,12 @@ class MovieListViewModel(private val movieDao: MovieDao):BaseViewModel(){
     }
 
     fun loadMovies(page : Int = 1){
-        subscription = movieApi.getPopularMovies(page)
+        subscription = movieApi.getNowPlayingMovies(page)
 //            Observable.fromCallable { movieDao.all }
 //                .concatMap {
 //                    dbPostList ->
 //                        if(dbPostList.isEmpty())
-//                            movieApi.getPopularMovies().concatMap {
+//                            movieApi.getNowPlayingMovies().concatMap {
 //                                            movies ->
 ////                                            movieDao.insertAll(*apiMovieList.toTypedArray())
 //                                 Observable.just(movies)

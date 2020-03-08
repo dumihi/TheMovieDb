@@ -15,12 +15,12 @@ interface MovieApi {
     /**
      * Get the list of the popular movie from the API
      */
-    @GET("movie/popular")
-    fun getPopularMovies(@Query("page") page: Int): Observable<Movies>
+    @GET("movie/now_playing")
+    fun getNowPlayingMovies(
+        @Query("page") page: Int,
+        @Query("language") language: String = "en-US"
+    ): Observable<Movies>
 
-    //    val url = originalHttpUrl.newBuilder()
-//        .addQueryParameter("api_key", apiKey)
-//        .build()
     @GET("movie/{id}")
     fun getMovieDetail(@Path("id") id: Int): Call<Movie>
 }
