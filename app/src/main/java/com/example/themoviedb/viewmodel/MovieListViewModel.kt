@@ -1,4 +1,4 @@
-package com.example.themoviedb.ui.movie
+package com.example.themoviedb.viewmodel
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -8,16 +8,14 @@ import io.reactivex.schedulers.Schedulers
 import com.example.themoviedb.R
 import com.example.themoviedb.base.BaseViewModel
 import com.example.themoviedb.model.Movie
-import com.example.themoviedb.model.database.MovieDao
 import com.example.themoviedb.model.Movies
 import com.example.themoviedb.model.database.Resource
 import com.example.themoviedb.network.MovieApi
 import javax.inject.Inject
 
-class MovieListViewModel(private val movieDao: MovieDao):BaseViewModel(){
+class MovieListViewModel :BaseViewModel(){
     @Inject
     lateinit var movieApi: MovieApi
-    val movieListAdapter: MovieListAdapter = MovieListAdapter()
 
     val movies: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
     val page: MutableLiveData<Int> = MutableLiveData()
@@ -73,7 +71,6 @@ class MovieListViewModel(private val movieDao: MovieDao):BaseViewModel(){
     private fun onRetrieveMovieListSuccess(movies: Movies){
         this.page.value = movies.page
         this.movies.value = Resource.success(movies.results)
-//        movieListAdapter.updateMovieList(movies.results)
     }
 
     private fun onRetrieveMovieListError(t: Throwable){

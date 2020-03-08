@@ -2,8 +2,8 @@ package com.example.themoviedb.injection.component
 
 import dagger.Component
 import com.example.themoviedb.injection.module.NetworkModule
-import com.example.themoviedb.ui.movie.MovieListViewModel
-import com.example.themoviedb.ui.movie.MovieViewModel
+import com.example.themoviedb.viewmodel.MovieListViewModel
+import com.example.themoviedb.viewmodel.MovieViewModel
 import javax.inject.Singleton
 
 /**

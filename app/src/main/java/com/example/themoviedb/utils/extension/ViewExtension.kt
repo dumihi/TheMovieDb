@@ -32,11 +32,3 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
-@BindingAdapter("loadImageURL")
-fun loadImageURL(view: ImageView, imageUrl: String) {
-    Glide.with(view.getContext())
-        .load(imageUrl)
-        .placeholder(R.drawable.user)
-        .into(view)
-}
-

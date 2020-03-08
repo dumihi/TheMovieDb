@@ -1,4 +1,4 @@
-package com.example.themoviedb.ui.movie
+package com.example.themoviedb.ui.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.themoviedb.R
 import com.example.themoviedb.databinding.ItemMovieBinding
 import com.example.themoviedb.model.Movie
+import com.example.themoviedb.viewmodel.MovieViewModel
 
-class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
+class MovieListAdapter(private val mListener: MovieAdapterListener): RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
     private lateinit var movieList: MutableList<Movie>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,6 +19,9 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(movieList[position])
+        holder.itemView.setOnClickListener {
+            mListener.onClickItem(movieList[position].id, movieList[position].title)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +42,10 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
     fun clearData(){
         this.movieList.clear()
         notifyDataSetChanged()
+    }
+
+    interface MovieAdapterListener {
+        fun onClickItem(movieId: Int, movieTitle: String)
     }
 
     class ViewHolder(private val binding: ItemMovieBinding):RecyclerView.ViewHolder(binding.root){

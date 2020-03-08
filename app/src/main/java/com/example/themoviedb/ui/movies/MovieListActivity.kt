@@ -1,5 +1,6 @@
-package com.example.themoviedb.ui.movie
+package com.example.themoviedb.ui.movies
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.annotation.StringRes
@@ -8,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.themoviedb.R
 import com.example.themoviedb.component.EndlessScrollListener
 import com.example.themoviedb.databinding.ActivityMovieListBinding
@@ -17,16 +16,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.example.themoviedb.injection.ViewModelFactory
 import com.example.themoviedb.model.database.Status
 import kotlinx.android.synthetic.main.activity_movie_list.*
-import android.R.attr.bottom
-import android.R.attr.top
-import android.R.attr.right
-import android.R.attr.left
 import androidx.recyclerview.widget.RecyclerView
 import android.graphics.Rect
 import android.view.View
+import com.example.themoviedb.ui.detail.MovieActivity
+import com.example.themoviedb.viewmodel.MovieListViewModel
 
 
-class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBottomListener {
+class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBottomListener, MovieListAdapter.MovieAdapterListener {
 
     private lateinit var binding: ActivityMovieListBinding
     private lateinit var viewModel: MovieListViewModel
@@ -51,7 +48,7 @@ class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBot
         initView()
         initListener()
 
-        viewModel.movies.observe(this, Observer {
+        viewModel.movies.observe(this, Observer { it ->
 
             when (it.status) {
                 Status.LOADING -> {
@@ -92,7 +89,7 @@ class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBot
         mEndlessScrollListener = EndlessScrollListener(linearLayoutManager, this)
         movieListRc.addOnScrollListener(mEndlessScrollListener!!)
 
-        mMovieListAdapter = MovieListAdapter()
+        mMovieListAdapter = MovieListAdapter(this)
         movieListRc.adapter = mMovieListAdapter
 
         //edit space between item in recycler view
@@ -130,12 +127,10 @@ class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBot
     }
 
     private fun initListener() {
-        swipeRefreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                mEndlessScrollListener?.onRefresh();
-                viewModel.loadMovies()
-            }
-        })
+        swipeRefreshLayout.setOnRefreshListener {
+            mEndlessScrollListener?.onRefresh()
+            viewModel.loadMovies()
+        }
 
     }
 
@@ -153,5 +148,12 @@ class MovieListActivity : AppCompatActivity(), EndlessScrollListener.ScrollToBot
 
     private fun hideError() {
         errorSnackbar?.dismiss()
+    }
+
+    override fun onClickItem(movieId: Int, movieTitle: String) {
+        val i = Intent(this, MovieActivity::class.java)
+        i.putExtra(MovieActivity.MOVIE_ID, movieId)
+        i.putExtra(MovieActivity.MOVIE_TITLE, movieTitle)
+        startActivity(i)
     }
 }

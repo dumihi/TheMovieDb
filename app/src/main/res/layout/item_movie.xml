@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.themoviedb.ui.movie.MovieViewModel" />
+            type="com.example.themoviedb.viewmodel.MovieViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,13 +25,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
+                    android:scaleType="fitXY"
                     loadImageURL="@{viewModel.getPoster()}"
                     android:background="@android:color/darker_gray" />
 

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.themoviedb.ui.movie.MovieListViewModel" />
+            type="com.example.themoviedb.viewmodel.MovieListViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -22,5 +22,5 @@ interface MovieApi {
     ): Observable<Movies>
 
     @GET("movie/{id}")
-    fun getMovieDetail(@Path("id") id: Int): Call<Movie>
+    fun getMovieDetail(@Path("id") id: Int): Observable<Movie>
 }

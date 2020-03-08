@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.example.themoviedb.injection.component.DaggerViewModelInjector
 import com.example.themoviedb.injection.component.ViewModelInjector
 import com.example.themoviedb.injection.module.NetworkModule
-import com.example.themoviedb.ui.movie.MovieListViewModel
-import com.example.themoviedb.ui.movie.MovieViewModel
+import com.example.themoviedb.viewmodel.MovieListViewModel
+import com.example.themoviedb.viewmodel.MovieViewModel
 
 abstract class BaseViewModel: ViewModel(){
     private val injector: ViewModelInjector = DaggerViewModelInjector

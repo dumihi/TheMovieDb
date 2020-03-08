@@ -13,8 +13,11 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".ui.detail.MovieActivity">
+
+        </activity>
         <activity
-            android:name=".ui.movie.MovieListActivity">
+            android:name=".ui.movies.MovieListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

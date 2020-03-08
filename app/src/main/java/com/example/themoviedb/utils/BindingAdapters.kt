@@ -1,12 +1,15 @@
 package com.example.themoviedb.utils
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.themoviedb.R
 import com.example.themoviedb.utils.extension.getParentActivity
 
 @BindingAdapter("adapter")
@@ -28,4 +31,12 @@ fun setMutableText(view: TextView,  text: MutableLiveData<String>?) {
     if(parentActivity != null && text != null) {
         text.observe(parentActivity, Observer { value -> view.text = value?:""})
     }
+}
+
+@BindingAdapter("loadImageURL")
+fun loadImageURL(view: ImageView, imageUrl: String) {
+    Glide.with(view.getContext())
+        .load(imageUrl)
+        .placeholder(R.drawable.user)
+        .into(view)
 }
