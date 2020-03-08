@@ -1,8 +1,9 @@
-package com.example.themoviedb.model
+package com.example.themoviedb.model.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.themoviedb.model.Movie
 
 @Dao
 interface MovieDao {

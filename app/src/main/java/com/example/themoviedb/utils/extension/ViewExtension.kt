@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.themoviedb.R
 
 fun View.getParentActivity(): AppCompatActivity?{
     var context = this.context
@@ -34,7 +35,8 @@ fun View.gone() {
 @BindingAdapter("loadImageURL")
 fun loadImageURL(view: ImageView, imageUrl: String) {
     Glide.with(view.getContext())
-        .load(imageUrl).apply(RequestOptions().circleCrop())
+        .load(imageUrl)
+        .placeholder(R.drawable.user)
         .into(view)
 }
 

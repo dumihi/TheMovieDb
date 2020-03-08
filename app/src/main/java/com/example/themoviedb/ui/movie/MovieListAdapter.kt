@@ -9,7 +9,7 @@ import com.example.themoviedb.databinding.ItemMovieBinding
 import com.example.themoviedb.model.Movie
 
 class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
-    private lateinit var movieList:List<Movie>
+    private lateinit var movieList: MutableList<Movie>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemMovieBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie, parent, false)
@@ -24,8 +24,19 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
         return if(::movieList.isInitialized) movieList.size else 0
     }
 
-    fun updateMovieList(movieList:List<Movie>){
-        this.movieList = movieList
+    fun updateMovieList(movieList:MutableList<Movie>){
+        if (itemCount == 0) {
+            this.movieList = movieList
+        }
+        else {
+            this.movieList.addAll(movieList)
+        }
+
+        notifyDataSetChanged()
+    }
+
+    fun clearData(){
+        this.movieList.clear()
         notifyDataSetChanged()
     }
 
